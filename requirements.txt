@@ -1,6 +1,6 @@
 streamlit
-fer
+fer==22.5.1
 opencv-python-headless
 Pillow
 numpy
-tensorflow-cpu
+tensorflow-cpu==2.13.0
