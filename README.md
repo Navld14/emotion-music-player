@@ -1,22 +1,27 @@
-# 🔍 Multimodal Search Engine
+# 🎵 Emotion-Aware Music Player
 
-Search through your images using **plain English** — no labels, no tags, no metadata needed. Powered by OpenAI's CLIP model which understands both images and text in the same vector space.
+Your face picks the playlist. Take a photo, the AI detects your emotion, and instantly queues music that matches your mood — no aux cord drama.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?style=flat-square&logo=pytorch)
-![CLIP](https://img.shields.io/badge/OpenAI-CLIP-412991?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python)
+![FER](https://img.shields.io/badge/FER-22.5.1-orange?style=flat-square)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.9-green?style=flat-square&logo=opencv)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.35-red?style=flat-square&logo=streamlit)
+![Docker](https://img.shields.io/badge/Docker-Deployed-2496ED?style=flat-square&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+🌐 **Live Demo:** [Try it here](https://emotion-music-player-foj8.onrender.com/)
+
+> ⚠️ First load may take 30-50 seconds as the server wakes from idle (Render free tier).
 
 ---
 
 ## 🎯 What It Does
 
-- 🖼️ **Upload any collection of images** (JPG, PNG, WEBP)
-- 💬 **Search with natural language** — *"a dog on a beach"*, *"red sports car"*, *"sunset over water"*
-- 🧠 **CLIP embeddings** — encodes both images and text into the same 512-dimensional vector space
-- 📊 **Similarity scores** — ranked results with match percentage
-- ⚙️ **Adjustable threshold** — filter results by minimum similarity
+- 📷 **Captures your photo** via webcam directly in the browser
+- 🧠 **Detects your emotion** — happy, sad, angry, neutral, surprised, fear, disgust
+- 🎵 **Queues matching music** — curated YouTube playlists per emotion
+- 📊 **Shows full emotion breakdown** — confidence scores for all 7 emotions
+- 🎬 **Embedded player** — plays music right in the app
 
 ---
 
@@ -24,74 +29,54 @@ Search through your images using **plain English** — no labels, no tags, no me
 
 | Tool | Purpose |
 |------|---------|
-| Python | Core language |
-| OpenAI CLIP | Multimodal vision-language model |
-| PyTorch | Deep learning backend |
-| Streamlit | Web app UI |
-| Pillow | Image processing |
-| NumPy | Vector operations & cosine similarity |
+| Python 3.10 | Core language |
+| FER (Facial Expression Recognition) | Emotion detection from face |
+| OpenCV | Image processing |
+| TensorFlow CPU | ML backend for FER |
+| Streamlit | Web app + camera input |
+| Docker | Containerized deployment on Render |
 
 ---
 
-## 🚀 Setup & Run
+## 🧠 Emotion → Mood Mapping
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/Navld14/multimodal-search-engine.git
-cd multimodal-search-engine
-```
+| Detected Emotion | Music Mood | Example Artists |
+|-----------------|------------|----------------|
+| 😄 Happy | Feel-good bangers | Pharrell, Bruno Mars, Lizzo |
+| 😢 Sad | Emotional ballads | Adele, Coldplay, Bon Iver |
+| 😤 Angry | High-energy rock | Linkin Park, RATM, Imagine Dragons |
+| 😐 Neutral | Chill lofi/indie | Tame Impala, MGMT, Lofi Radio |
+| 😲 Surprised | Pop hits | The Weeknd, Dua Lipa, Harry Styles |
+| 😨 Anxious/Fear | Calming classical | Einaudi, Debussy, Satie |
+| 😒 Disgusted | Reset vibes | SZA, Olivia Rodrigo |
 
-### 2. Install dependencies
+---
+
+## 🚀 Setup & Run Locally
+
 ```bash
+git clone https://github.com/Navld14/emotion-music-player.git
+cd emotion-music-player
 pip install -r requirements.txt
-```
-
-> **Note:** First run will download the CLIP ViT-B/32 model (~350MB). This happens automatically.
-
-### 3. Run the app
-```bash
 streamlit run app.py
 ```
 
-Open `http://localhost:8501` in your browser.
-
----
-
-## 💡 How It Works
-
+### Or run with Docker
+```bash
+docker build -t emotion-music .
+docker run -p 8501:8501 emotion-music
 ```
-Images → CLIP Image Encoder → 512-dim embeddings
-Query  → CLIP Text Encoder  → 512-dim embedding
-                                      ↓
-                          Cosine Similarity Search
-                                      ↓
-                            Ranked Results by Score
-```
-
-CLIP (Contrastive Language-Image Pretraining) was trained on 400 million image-text pairs, learning to map both modalities into a shared embedding space. This means the embedding for *"a dog"* sits close to actual dog images in vector space — enabling zero-shot search with no fine-tuning.
-
----
-
-## 🧪 Example Queries
-
-| Query | What it finds |
-|-------|--------------|
-| `a smiling person` | Photos with happy faces |
-| `outdoor landscape` | Nature, parks, open spaces |
-| `something colorful` | Vibrant, multi-colored images |
-| `food on a table` | Meal photos, restaurants |
-| `night scene with lights` | City lights, evening photos |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-multimodal-search-engine/
+emotion-music-player/
 │
 ├── app.py              # Main Streamlit application
 ├── requirements.txt    # Python dependencies
-├── .gitignore
+├── Dockerfile          # Docker config for Render
 └── README.md
 ```
 
