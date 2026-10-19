@@ -1,8 +1,6 @@
-streamlit==1.35.0
-torch>=2.0.0
-git+https://github.com/openai/CLIP.git
-Pillow>=10.0.0
-numpy>=1.24.0
-ftfy
-regex
-tqdm
+streamlit
+fer
+opencv-python-headless
+Pillow
+numpy
+tensorflow-cpu
